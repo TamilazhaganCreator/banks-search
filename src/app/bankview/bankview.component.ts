@@ -11,11 +11,17 @@ import { BankModel } from './../model';
 export class BankviewComponent {
 
   selectedBank: BankModel = new BankModel()
+  favourites: BankModel[] = []
   otherFactors = ["address", "city", "district", "ifsc", "state"]
 
   constructor(public activatedRoute: ActivatedRoute, public rtr: Router, private global: GlobalService) {
     this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
-      this.selectedBank = this.global.currentLocationBanks.find(b => b.ifsc == params.get("id"))
+      if (params.get("source") == "home") {
+        this.selectedBank = this.global.currentLocationBanks.find(b => b.ifsc == params.get("id"))
+      } else {
+        this.favourites = JSON.parse(localStorage.getItem("favouriteBanksIfsc")) || []
+        this.selectedBank = this.favourites.find(b => b.ifsc == params.get("id"))
+      }
     })
   }
 

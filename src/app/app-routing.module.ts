@@ -7,7 +7,7 @@ import { ShowfavouritesComponent } from './showfavourites/showfavourites.compone
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'showfavourites', component: ShowfavouritesComponent },
-  { path: 'bank/:id', component: BankviewComponent }
+  { path: 'bank/:source/:id', component: BankviewComponent }
 ];
 
 @NgModule({

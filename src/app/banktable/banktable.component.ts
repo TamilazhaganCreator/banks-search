@@ -13,12 +13,14 @@ export class BanktableComponent implements OnInit {
   @Input() dataSource = new MatTableDataSource()
   @Input() columns: string[] = []
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  source = ""
   favouriteBanksIfsc: BankModel[] = []
 
   constructor(private rtr: Router) { }
 
   ngOnInit() {
     this.favouriteBanksIfsc = JSON.parse(localStorage.getItem("favouriteBanksIfsc")) || []
+    this.source = this.columns.includes("favourite") ? 'home' : 'favourites'
     this.dataSource.paginator = this.paginator;
   }
 
@@ -37,7 +39,7 @@ export class BanktableComponent implements OnInit {
   }
 
   viewBank(id) {
-    this.rtr.navigate(["bank", id])
+    this.rtr.navigate(["bank", this.source, id])
   }
 
 

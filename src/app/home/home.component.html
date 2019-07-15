@@ -1,0 +1,29 @@
+<div class="page">
+    <mat-grid-list cols="4" rowHeight="3:1">
+        <mat-grid-tile colspan="1">
+            <mat-form-field style="padding-right: 2rem;">
+                <mat-label>Choose city</mat-label>
+                <mat-select value="KUMBAKONAM" (selectionChange)="changeLocation($event.value)">
+                    <mat-option value="AMBATTUR">Ambattur</mat-option>
+                    <mat-option value="KUMBAKONAM">Kumbakonam</mat-option>
+                    <mat-option value="MANGO">Mango</mat-option>
+                    <mat-option value="TIRUNELVELI">Tirunelveli</mat-option>
+                    <mat-option value="UDAIPUR">Udaipur</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="3">
+            <mat-form-field>
+                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+            </mat-form-field>
+        </mat-grid-tile>
+    </mat-grid-list>
+    <div class="mat-elevation-z8">
+        <div *ngIf="tableLoader" class="loader">
+            <mat-spinner></mat-spinner>
+        </div>
+        <div *ngIf="!tableLoader">
+            <app-banktable [columns]="columns" [dataSource]="dataSource"></app-banktable>
+        </div>
+    </div>
+</div>
